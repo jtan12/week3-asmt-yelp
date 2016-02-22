@@ -20,7 +20,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="105" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="0ys-VH-MxL">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <searchBar key="tableHeaderView" contentMode="redraw" id="130-pe-9Cj">
+                                <searchBar key="tableHeaderView" contentMode="redraw" id="Evo-ZY-FSf">
                                     <rect key="frame" x="0.0" y="64" width="320" height="44"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <textInputTraits key="textInputTraits"/>
@@ -130,6 +130,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Yelp Search" id="da4-6Q-FAa" colorLabel="IBBuiltInLabel-Red"/>
                     <connections>
+                        <outlet property="searchBar" destination="Evo-ZY-FSf" id="J90-a6-vlU"/>
                         <outlet property="tableView" destination="0ys-VH-MxL" id="K8g-GE-1q1"/>
                     </connections>
                 </viewController>

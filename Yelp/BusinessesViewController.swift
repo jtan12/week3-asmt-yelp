@@ -3,34 +3,37 @@
 //  Yelp
 //
 //  Created by Timothy Lee on 4/23/15.
+//  Modified by Jason Tan on 2/20/16.
 //  Copyright (c) 2015 Timothy Lee. All rights reserved.
 //
 
 import UIKit
 
-class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
+class BusinessesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate
 {
 
     var businesses: [Business]!
+    var searchResults: [Business]!
+    //var searchBar = UISearchBar()
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
+        searchBar.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 120
         
         
-        
-        
-        
         Business.searchWithTerm("Thai", completion: { (businesses: [Business]!, error: NSError!) -> Void in
             self.businesses = businesses
+            self.searchResults = businesses
             self.tableView.reloadData()
         
             for business in businesses {
@@ -57,25 +60,68 @@ class BusinessesViewController: UIViewController, UITableViewDataSource, UITable
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        if searchResults != nil {
+            return searchResults!.count
+        } else {
+            return 0
+        }
+        
+    }
 
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCellWithIdentifier("BusinessCell", forIndexPath: indexPath) as! BusinessCell
         
-        cell.business = businesses[indexPath.row]
+        cell.business = searchResults[indexPath.row]
         
         return cell
     }
     
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    // This method updates searchResults based on the text in the Search Box
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String)
     {
-        if businesses != nil {
-            return businesses!.count
+        // When there is no text, searchResults is the same as the original data
+        if searchText.isEmpty {
+            searchResults = businesses
         } else {
-            return 0
+            // The user has entered text into the search box
+            // Use the filter method to iterate over all items in the data array
+            // For each item, return true if the item should be included and false if the item should NOT be included
+            self.searchResults = businesses?.filter({(busObj: Business) -> Bool in
+                // If dataItem matches the searchText, return true to include it
+                let businessTitle = busObj.name! as String
+                
+                if businessTitle.rangeOfString(searchText, options: .CaseInsensitiveSearch) != nil{
+                    return true
+                } else {
+                    return false
+                }
+            })
+            
         }
+        tableView.reloadData()
+    }
+    
+    
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar)
+    {
+        self.searchBar.showsCancelButton = true
+        tableView.reloadData()
+    }
+    
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar)
+    {
+        searchBar.showsCancelButton = false
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+        tableView.reloadData()
     }
     
     

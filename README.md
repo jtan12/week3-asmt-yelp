@@ -14,21 +14,28 @@ The following **required** functionality is completed:
 
 The following **optional** features are implemented:
 
-- [ ] Search results page
+- [x] Search results page
 - [ ] Infinite scroll for restaurant results.
 - [ ] Implement map view of restaurant results.
 - [ ] Implement the restaurant detail page.
 
 The following **additional** features are implemented:
 
-- [ ] N/A
+- [x] Modified color of navigation bar to match Yelp's red'
 
 
 ## Video Walkthrough 
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/KcwcFor.gif' title='Yelp Search App Simulation' width='' alt='Yelp Search App Simulation' />
+Portrait View Simulation
+<img src='http://i.imgur.com/KcwcFor.gif' title='Yelp Search App Simulation 1' width='' alt='Yelp Search App Simulation 1' />
+
+Landscape View Simulation
+<img src='http://i.imgur.com/RQ14FKk.gif' title='Yelp Search App Simulation 2' width='' alt='Yelp Search App Simulation 2' />
+
+Search Bar Simulation
+<img src='http://i.imgur.com/xJ9W3vT.gif' title='Yelp Search App Simulation 3' width='' alt='Yelp Search App Simulation 3' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
